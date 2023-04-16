@@ -40,7 +40,7 @@ class Dataset(TorchDataset):
         target_fp = self.target_file_path(n)
         try:
             audio, sample_rate = torchaudio.load(target_fp)
-            audio = torch.tensor([audio.mean(dim=0)])
+            audio = audio.mean(dim=0).unsqueeze(0)
         except OSError as e:
             print("File not found, try running `python preprocess.py` first.\n\n", e)
             return
