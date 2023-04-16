@@ -17,7 +17,7 @@ class AUDIO(Dataset):
     def __init__(
         self,
         root: str,
-        src_ext_audio: str = ".wav",
+        src_ext_audio: str = ".mp3",
         n_classes: int = 1,
     ) -> None:
         super(AUDIO, self).__init__(root)
