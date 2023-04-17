@@ -39,7 +39,6 @@ def extract_representations(encoder, dataloader):
         with torch.no_grad():
             h0 = encoder(x)
             representations.append(h0)
-            print(h0.shape)
 
     if len(representations) > 1:
         representations = torch.cat(representations, dim=0)
