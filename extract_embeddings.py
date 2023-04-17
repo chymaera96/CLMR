@@ -65,7 +65,7 @@ def main():
         os.mkdir(args.out_dir)
 
     print("Preprocessing audio and creating dataset object ...")
-    audio_dataset = get_dataset("gtzan", dataset_dir=args.data_dir, subset="test")
+    audio_dataset = get_dataset("gtzan", dataset_dir='./data', subset="test")
     for idx in range(len(audio_dataset)):
         audio_dataset.preprocess(idx, args.sample_rate)
 

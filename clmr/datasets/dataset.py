@@ -15,7 +15,7 @@ def preprocess_audio(source, target, sample_rate):
 
 class Dataset(TorchDataset):
 
-    _ext_audio = ".mp3"
+    _ext_audio = ".wav"
 
     def __init__(self, root: str):
         pass
