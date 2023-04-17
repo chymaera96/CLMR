@@ -60,6 +60,7 @@ def main():
     if not os.path.exists(args.ckp):
         raise FileNotFoundError("That checkpoint does not exist")
 
+    print("Preprocessing audio and creating dataset object ...")
     audio_dataset = get_dataset(args.data_dir, subset="train")
     for idx in range(len(audio_dataset)):
         audio_dataset.preprocess(idx, args.sample_rate)
@@ -78,7 +79,7 @@ def main():
         shuffle=False,
     )
 
-
+    print("Creating SampleCNN encoder ...")
     encoder = SampleCNN(
         strides=[3, 3, 3, 3, 3, 3, 3, 3, 3],
         supervised=args.supervised,
@@ -87,7 +88,9 @@ def main():
 
     n_features = encoder.fc.in_features  # get dimensions of last fully-connected layer
 
+    print(f"Loading checkpoint from {args.ckp}")
     state_dict = load_encoder_checkpoint(args.ckp, audio_dataset.n_classes)
+
     encoder.load_state_dict(state_dict)
 
     cl = ContrastiveLearning(args, encoder)
@@ -97,6 +100,10 @@ def main():
     if not os.exists(args.out_dir):
         os.mkdir(args.out_dir)
 
+    print(f"Extracting embeddings ...")
     embs = extract_representations(cl.encoder, audio_loader)
     fname = args.data_dir.split('/')[-1]
-    torch.save(embs, os.path.join(args.out_dir, f'CLMR_features_{fname}.pt'))
+
+    out_path = os.path.join(args.out_dir, f'CLMR_features_{fname}.pt')
+    print(f"Saving embeddings at {out_path}")
+    torch.save(embs, out_path)

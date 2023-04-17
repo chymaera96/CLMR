@@ -38,8 +38,12 @@ class AUDIO(Dataset):
                     self._path
                 )
             )
+        
+        print(f"Saving index json file at {os.path.join(root, 'clmr_idx.json')}")
         with open(os.path.join(root, 'clmr_idx.json'), 'w') as fp:
             json.dump(self.fl,fp)
+
+
 
     def file_path(self, n: int) -> str:
         fp = self.fl[n]
