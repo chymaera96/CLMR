@@ -100,9 +100,6 @@ def main():
     cl.eval()
     cl.freeze()
 
-    if not os.exists(args.out_dir):
-        os.mkdir(args.out_dir)
-
     print(f"Extracting embeddings ...")
     embs = extract_representations(cl.encoder, audio_loader)
     fname = args.data_dir.split('/')[-1]
