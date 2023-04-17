@@ -44,4 +44,8 @@ class Dataset(TorchDataset):
         except OSError as e:
             print("File not found, try running `python preprocess.py` first.\n\n", e)
             return
+        except Exception as e:
+            print(str(e))
+            return self[n+1]
+        
         return audio, sample_rate
