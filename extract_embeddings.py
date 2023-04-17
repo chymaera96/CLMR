@@ -35,22 +35,19 @@ parser.add_argument("--out_dir", default='../DLAM_coursework/features', type=str
 def extract_representations(encoder, dataloader):
 
     representations = []
-    ys = []
     for x, y in tqdm(dataloader):
         with torch.no_grad():
             h0 = encoder(x)
             representations.append(h0)
             print(h0.shape)
-            ys.append(y)
 
     if len(representations) > 1:
         representations = torch.cat(representations, dim=0)
-        ys = torch.cat(ys, dim=0)
     else:
         representations = representations[0]
-        ys = ys[0]
 
-        return ys
+    
+    return representations
 
 
 def main():
