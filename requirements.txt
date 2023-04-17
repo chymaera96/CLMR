@@ -6,3 +6,4 @@ pytorch-lightning
 soundfile
 scikit-learn
 matplotlib
+gdown
