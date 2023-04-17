@@ -59,6 +59,9 @@ def main():
 
     if not os.path.exists(args.ckp):
         raise FileNotFoundError("That checkpoint does not exist")
+    
+    if not os.path.exists(args.out_dir):
+        os.mkdir(args.out_dir)
 
     print("Preprocessing audio and creating dataset object ...")
     audio_dataset = get_dataset(args.data_dir, subset="train")
@@ -107,3 +110,7 @@ def main():
     out_path = os.path.join(args.out_dir, f'CLMR_features_{fname}.pt')
     print(f"Saving embeddings at {out_path}")
     torch.save(embs, out_path)
+
+
+if __name__ == '__main__':
+    main()
