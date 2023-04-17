@@ -28,7 +28,7 @@ for k, v in config.items():
     parser.add_argument(f"--{k}", default=v, type=type(v))
 
 parser.add_argument("--data_dir", default='../DLAM_coursework/data/fma_downstream', type=str)
-parser.add_argument("--ckp", default='', type=str)
+parser.add_argument("--ckp", default='clmr_magnatagatune_mlp/clmr_epoch=10000.ckpt', type=str)
 parser.add_argument("--out_dir", default='../DLAM_coursework/features', type=str)
 
 
