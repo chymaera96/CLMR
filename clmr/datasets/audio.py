@@ -2,6 +2,7 @@ import os
 from glob import glob
 from torch import Tensor
 from typing import Tuple
+import json
 
 
 from clmr.datasets import Dataset
@@ -37,6 +38,8 @@ class AUDIO(Dataset):
                     self._path
                 )
             )
+        with open(os.path.join(root, 'clmr_idx.json'), 'w') as fp:
+            json.dump(self.fl,fp)
 
     def file_path(self, n: int) -> str:
         fp = self.fl[n]
