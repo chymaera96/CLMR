@@ -53,6 +53,7 @@ def extract_representations(encoder, dataloader):
 
 
 def main():
+    print("Why??")
     args = parser.parse_args()
     pl.seed_everything(args.seed)
     args.accelerator = None
